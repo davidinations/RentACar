@@ -1,28 +1,121 @@
 import features as ft
 import winsound
 import tkinter
+import re
 from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import showinfo
 from tkinter import messagebox
 from tkcalendar import DateEntry
+from datetime import datetime
 
 # Function to create GUI
-def transition():
-        global bottom_frame, top_frame
-        bottom_frame.grid_forget()
+# Error   winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Error.wav", winsound.SND_ASYNC)
+# Success winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Success.wav", winsound.SND_ASYNC)
+# Click   winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Click.wav", winsound.SND_ASYNC)
+
+def validate_number(input):
+        if input.isdigit() and len(input) <= 10:
+                return True
+        elif input == "":
+                return True
+        else:
+                return False
+
+def validate_alphabet(input):
+        # regular expression pattern to match alphabetic characters and spaces
+        pattern = r'^[a-zA-Z ]+$'
+
+        # return True if input matches the pattern and is not an empty string
+        if re.match(pattern, input) is not None or input == "":
+                return True
+        else:
+                return False
+
+def validate_digit(input):
+        if input.isdigit():
+                return True
+        elif input == "":
+                return True
+        else:
+                return False
+
+def nik_type_menu():
+        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Click.wav", winsound.SND_ASYNC)           
+        
+        global top_frame, bottom_frame, label_menu, entry_nik, button_exit
+        
         top_frame.grid_forget()
-        main_menu()
+        bottom_frame.grid_forget()
+
+        top_frame = Frame(root, width=1175, height=500, bg='grey')
+        top_frame.grid(row=1, column=0, padx=50, pady=50)
+
+        # create a label identitas + entry identitas
+        label_nik = Label(top_frame, text="NIK", bg='grey', width=10, font=("Helvetica", 20))
+        label_nik.grid(row=0, column=0, padx=10, pady=10)
+
+        validate_nik = (top_frame.register(validate_number), '%P')
+        entry_nik = Entry(top_frame, width=60, validate="key", validatecommand=validate_nik)
+        entry_nik.config(font=("Arial", 14), bg="white", fg="black", bd=2, relief="groove")
+        entry_nik.grid(row=0, column=1, padx=30, pady=10)
+
+        # add button after validate to exit menu
+        button_exit = Button(top_frame, text="Exit", width=10, height=1, command=transition)
+        button_exit.grid(row=0, column=3, padx=40, pady=10)
+
+def input_identity(data_nik):
+        global top_frame, bottom_frame, button_show_all
+
+        top_frame.grid_forget()
+        bottom_frame.grid_forget()
+
+        top_frame = Frame(root, width=1175, height=50, bg='grey')
+        top_frame.grid(row=0, column=0, padx=100, pady=30)
+
+        # create a label identitas + entry identitas
+        label_nik = Label(top_frame, text="NIK", bg='grey', width=10, font=("Helvetica", 20))
+        label_nik.grid(row=0, column=0, padx=10, pady=10)
+
+        # Make Entry NIK Read Only
+        lock_nik_value = StringVar(value=data_nik)
+        lock_entry_nik = Entry(top_frame, width=52, textvariable=lock_nik_value, state='readonly')
+        lock_entry_nik.config(font=("Arial", 14), bg="white", fg="black", bd=2, relief="groove")
+        lock_entry_nik.grid(row=0, column=1, padx=40, pady=10)
+        
+        # create a label nama + entry nama
+        label_nama = Label(top_frame, text="Nama", bg='grey', font=("Helvetica", 20))
+        label_nama.grid(row=1, column=0, padx=40, pady=10)
+        
+        # create a label mobil + entry mobil
+        label_mobil = Label(top_frame, text="Mobil", bg='grey', font=("Helvetica", 20))
+        label_mobil.grid(row=2, column=0, padx=40, pady=10)
+
+        # create a label harga + entry harga
+        label_harga = Label(top_frame, text="Harga (Rupiah)", bg='grey', font=("Helvetica", 20))
+        label_harga.grid(row=3, column=0, padx=40, pady=10)
+
+        # create a label tanggal masuk + entry tanggal masuk
+        label_tanggal_masuk = Label(top_frame, text="Tanggal Masuk", bg='grey', font=("Helvetica", 20))
+        label_tanggal_masuk.grid(row=4, column=0, padx=40, pady=10)
+
+        # create a label tanggal keluar + entry tanggal keluar
+        label_tanggal_keluar = Label(top_frame, text="Tanggal Keluar", bg='grey', font=("Helvetica", 20))
+        label_tanggal_keluar.grid(row=5, column=0, padx=40, pady=10)
+
+        # create a label status + entry status
+        label_status = Label(top_frame, text="Status", bg='grey', font=("Helvetica", 20))
+        label_status.grid(row=6, column=0, padx=40, pady=10)
 
 def main_menu():               
-        global top_frame, bottom_frame, mid_frame, tree_frame
+        global top_frame, bottom_frame
         
         # create a top frames
         top_frame = Frame(root, width=1100, height=500, bg='grey')
         top_frame.grid(row=0, column=0, padx=40, pady=50)
 
         # create a bottom frames
-        bottom_frame = Frame(root, width=1175, height=100, bg='grey')
+        bottom_frame = Frame(root, width=1175, height=100, bg='#4a9c46')
         bottom_frame.grid(row=1, column=0, padx=40, pady=10)
 
         # Add a label to the top frame
@@ -41,104 +134,83 @@ def main_menu():
         button_exit = Button(bottom_frame, text="Exit", width=30, height=3, command=exit_menu)
         button_exit.grid(row=0, column=4, padx=10, pady=10)
 
-def add_menu():                
-        global top_frame, bottom_frame, entry_nik, button_validate
-        
-        top_frame.grid_forget()
+def transition():         
+        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Click.wav", winsound.SND_ASYNC)   
+        global bottom_frame, top_frame, label_menu
         bottom_frame.grid_forget()
+        top_frame.grid_forget()
+        label_menu.grid_forget()
+        main_menu()
 
-        top_frame = Frame(root, width=1175, height=50, bg='grey')
-        top_frame.grid(row=0, column=0, padx=45, pady=30)
+def add_menu():           
+        global label_menu
+        nik_type_menu()
 
-        bottom_frame = Frame(root, width=1175, height=500, bg='grey')
-        bottom_frame.grid(row=1, column=0, padx=60, pady=20)
-
-        # create a label identitas + entry identitas
-        label_nik = Label(top_frame, text="NIK", bg='grey', width=10, font=("Helvetica", 20))
-        label_nik.grid(row=0, column=0, padx=10, pady=10)
-
-        entry_nik = Entry(top_frame, width=100)
-        entry_nik.grid(row=0, column=1, padx=30, pady=10)
+        label_menu = Label(root, text="Add Menu", bg='#4a9c46', font=("Helvetica", 20), height=2)
+        label_menu.grid(row=0, column=0, padx=10, pady=5)
 
         # add button after entry nik to validate
         button_validate = Button(top_frame, text="Validate", width=10, height=1, command=add_get_entry_nik)
         button_validate.grid(row=0, column=2, padx=10, pady=10)
 
-        # add button after validate to exit menu
-        button_exit = Button(top_frame, text="Exit", width=10, height=1, command=transition)
-        button_exit.grid(row=0, column=3, padx=10, pady=10)
-
 def add_get_entry_nik():
-        global entry_nik
+        global entry_nik, data_nik
         data_nik = entry_nik.get()
-        ft.add_validate(data_nik)       
-        if ft.add_validate(data_nik) == False:
-                pesan = f"Data dengan NIK {data_nik} belum ada silahkan tambah data lain terlebih dahulu"
-                showinfo(title="Success",message=pesan)
-                add_identity()
-        else:
-                pesan = f"Data dengan NIK {data_nik} sudah ada"
+        if len(data_nik) != 10:
+                winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Error.wav", winsound.SND_ASYNC)
+                pesan = "NIK harus 10 digit"
                 showinfo(title="Warning",message=pesan)
+        else:
+                ft.nik_validate(data_nik)       
+                if ft.nik_validate(data_nik) == False:
+                        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Success.wav", winsound.SND_ASYNC)
+                        pesan = f"Data dengan NIK {data_nik} belum ada silahkan tambah data lain terlebih dahulu"
+                        showinfo(title="Success",message=pesan)
+                        add_identity()
+                else:
+                        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Error.wav", winsound.SND_ASYNC)
+                        pesan = f"Data dengan NIK {data_nik} sudah ada"
+                        showinfo(title="Warning",message=pesan)
 
-def add_identity():            
-        global entry_nik, entry_nama, entry_mobil, entry_harga, entry_tanggal_masuk, entry_status, entry_tanggal_keluar, button_validate
+def add_identity():
+        global data_nik,entry_nama, entry_mobil, entry_harga, entry_tanggal_masuk, entry_status, entry_tanggal_keluar
+        input_identity(data_nik)
 
-        button_validate.grid_forget()
+        validate_name = (top_frame.register(validate_alphabet), '%P')
+        entry_nama = Entry(top_frame, width=52, validate="key", validatecommand=validate_name)
+        entry_nama.config(font=("Arial", 14), bg="white", fg="black", bd=2, relief="groove")
+        entry_nama.grid(row=1, column=1, padx=40, pady=10)
 
-        # add button after validate to exit menu
-        button_exit = Button(top_frame, text="Exit", width=10, height=1, command=transition)
-        button_exit.grid(row=0, column=3, padx=10, pady=10)
+        entry_mobil = Entry(top_frame, width=52)
+        entry_mobil.config(font=("Arial", 14), bg="white", fg="black", bd=2, relief="groove")
+        entry_mobil.grid(row=2, column=1, padx=40, pady=10)
 
-        # Make Entry NIK Read Only
-        lock_nik_value = StringVar(value=entry_nik.get())
-        lock_entry_nik = Entry(top_frame, width=120, textvariable=lock_nik_value, state='readonly')
-        lock_entry_nik.grid(row=0, column=1, padx=30, pady=10)
-        
-        # create a label nama + entry nama
-        label_nama = Label(bottom_frame, text="Nama", bg='grey', font=("Helvetica", 20))
-        label_nama.grid(row=0, column=1, padx=10, pady=10)
+        validate_price = (top_frame.register(validate_digit), '%P')
+        entry_harga = Entry(top_frame, width=52, validate="key", validatecommand=validate_price)
+        entry_harga.config(font=("Arial", 14), bg="white", fg="black", bd=2, relief="groove")
+        entry_harga.grid(row=3, column=1, padx=40, pady=10)
 
-        entry_nama = Entry(bottom_frame, width=30)
-        entry_nama.grid(row=0, column=2, padx=10, pady=10)
+        entry_tanggal_masuk = DateEntry(top_frame, width=50, background='darkblue', foreground='white', borderwidth=2, sticky='w')
+        entry_tanggal_masuk.config(font=("Arial", 14))
+        entry_tanggal_masuk.grid(row=4, column=1, padx=40, pady=10)
 
-        # create a label mobil + entry mobil
-        label_mobil = Label(bottom_frame, text="Mobil", bg='grey', font=("Helvetica", 20))
-        label_mobil.grid(row=1, column=1, padx=10, pady=10)
+        entry_tanggal_keluar = DateEntry(top_frame, width=50, background='darkblue', foreground='white', borderwidth=2, sticky='w')
+        entry_tanggal_keluar.config(font=("Arial", 14))
+        entry_tanggal_keluar.grid(row=5, column=1, padx=40, pady=10)
 
-        entry_mobil = Entry(bottom_frame, width=30)
-        entry_mobil.grid(row=1, column=2, padx=10, pady=10)
-
-        # create a label harga + entry harga
-        label_harga = Label(bottom_frame, text="Harga (Rupiah)", bg='grey', font=("Helvetica", 20))
-        label_harga.grid(row=2, column=1, padx=10, pady=10)
-
-        entry_harga = Entry(bottom_frame, width=30)
-        entry_harga.grid(row=2, column=2, padx=10, pady=10)
-
-        # create a label tanggal masuk + entry tanggal masuk
-        label_tanggal_masuk = Label(bottom_frame, text="Tanggal Masuk", bg='grey', font=("Helvetica", 20))
-        label_tanggal_masuk.grid(row=3, column=1, padx=10, pady=10)
-
-        entry_tanggal_masuk = DateEntry(bottom_frame, width=30, background='darkblue', foreground='white', borderwidth=2)
-        entry_tanggal_masuk.grid(row=3, column=2, padx=10, pady=10)
-
-        # create a label status + entry status
-        label_status = Label(bottom_frame, text="Status", bg='grey', font=("Helvetica", 20))
-        label_status.grid(row=5, column=1, padx=10, pady=10)
-
-        entry_status = Entry(bottom_frame, width=30)
-        entry_status.grid(row=5, column=2, padx=10, pady=10)
-
-        # create a label tanggal keluar + entry tanggal keluar
-        label_tanggal_keluar = Label(bottom_frame, text="Tanggal Keluar", bg='grey', font=("Helvetica", 20))
-        label_tanggal_keluar.grid(row=4, column=1, padx=10, pady=10)
-
-        entry_tanggal_keluar = DateEntry(bottom_frame, width=30, background='darkblue', foreground='white', borderwidth=2)
-        entry_tanggal_keluar.grid(row=4, column=2, padx=10, pady=10)
+        entry_status = tkinter.StringVar()
+        options = ["Progress", "Selesai"]
+        entry_status_options = tkinter.OptionMenu(top_frame, entry_status, "", *options)
+        entry_status_options.configure(font=("Arial", 14), background="white", foreground="black", borderwidth=2, relief="groove", width=48)
+        entry_status_options.grid(row=6, column=1, padx=40, pady=10)
 
         # add buttons to the bottom frame
-        button_add = Button(bottom_frame, text="Add", width=30, height=1, command=add_get_entry_data)
-        button_add.grid(row=6, column=1, padx=8, pady=10, sticky='w')
+        button_add = Button(top_frame, text="Add", width=30, height=3, command=add_get_entry_data)
+        button_add.grid(row=7, column=0, padx=10, pady=30)
+
+        # add button after validate to exit menu
+        button_exit = Button(top_frame, text="Exit", width=10, height=1, command=transition)
+        button_exit.grid(row=0, column=2, padx=30, pady=10)
 
 def add_get_entry_data():
         global entry_nik, entry_nama, entry_mobil, entry_harga, entry_tanggal_masuk, entry_status, entry_tanggal_keluar
@@ -149,41 +221,51 @@ def add_get_entry_data():
         data_tanggal_masuk = entry_tanggal_masuk.get_date()
         data_status = entry_status.get()
         data_tanggal_keluar = entry_tanggal_keluar.get_date()
+        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Error.wav", winsound.SND_ASYNC)
         result = messagebox.askyesno(title="Confirmation", message="Apakah anda yakin ingin menambahkan data ini?")
         if result:
+                winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Success.wav", winsound.SND_ASYNC)
                 pesan = f"Data dengan NIK {data_nik} berhasil ditambahkan"
                 showinfo(title="Success",message=pesan)
                 ft.add_data(data_nik, data_nama, data_mobil, data_harga, data_tanggal_masuk, data_status, data_tanggal_keluar)
-                add_menu()
+                transition()
         else:
-                add_menu()
+                transition()
 
-def show_menu():                
-        global top_frame, bottom_frame, button_show_all, button_show_by_nik, button_exit
+def show_menu():          
+        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Click.wav", winsound.SND_ASYNC)   
+        
+        global top_frame, bottom_frame, label_menu, button_show_all, button_show_by_nik, button_exit
         
         top_frame.grid_forget()
         bottom_frame.grid_forget()
+
+        label_menu = Label(root, text="Show Menu", bg='#4a9c46', font=("Helvetica", 20), height=2)
+        label_menu.grid(row=0, column=0, padx=10, pady=5)
 
         top_frame = Frame(root, width=1175, height=500, bg='grey')
         top_frame.grid(row=1, column=0, padx=50, pady=50)
 
         # add 3 buttons to the bottom frame
-        button_show_all = Button(top_frame, text="Show All", width=30, height=3, command=show_get_length)
+        button_show_all = Button(top_frame, text="Show All", width=30, height=3, command=show_get_length_all)
         button_show_all.grid(row=0, column=0, padx=480, pady=50)
 
-        button_show_by_nik = Button(top_frame, text="Show By NIK", width=30, height=3, command=show_by_nik)
+        button_show_by_nik = Button(top_frame, text="Show By NIK", width=30, height=3, command=show_get_length_nik)
         button_show_by_nik.grid(row=1, column=0, padx=480, pady=50)
 
         button_exit = Button(top_frame, text="Exit", width=30, height=3, command=transition)
         button_exit.grid(row=2, column=0, padx=480, pady=50)
 
-def show_get_length():                
+def show_get_length_all():   
+        global label_menu             
         ft.show_validate()
         if ft.show_validate() == False:
+                winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Error.wav", winsound.SND_ASYNC)
                 pesan = "Data masih kosong silahkan tambah data terlebih dahulu"
                 showinfo(title="Warning",message=pesan)
                 pass
         else:
+                winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Click.wav", winsound.SND_ASYNC)
                 button_show_all.grid_forget()
                 button_show_by_nik.grid_forget()
                 button_exit.grid_forget()
@@ -192,24 +274,32 @@ def show_get_length():
 def show_all():                 
         global top_frame
 
-        button_exit = Button(top_frame, text="Exit", width=30, height=3, command=show_menu)
+        button_exit = Button(top_frame, text="Exit", width=30, height=3, command=transition)
         button_exit.grid(row=2, column=0, padx=480, pady=50)
 
         # create a new frame inside the right frame
         tree_frame = Frame(top_frame, width=1100, height=500, bg='grey')
         tree_frame.grid(row=0, column=0, padx=10, pady=50)  
 
-        # create a new scrollbar widget
-        tree_scroll = Scrollbar(tree_frame)
-        tree_scroll.pack(side=RIGHT, fill=Y)
+        # create scrollbar vertically
+        tree_scroll_y = Scrollbar(tree_frame)
+        tree_scroll_y.pack(side=RIGHT, fill=Y)
+
+        # create scrollbar horizontally
+        tree_scroll_x = Scrollbar(tree_frame, orient='horizontal')
+        tree_scroll_x.pack(side=BOTTOM, fill=X)
 
         # Create a Treeview widger and add it to the new frame
         my_tree = ttk.Treeview(tree_frame)
         my_tree.pack(side=LEFT, fill=BOTH, expand=True)
 
-        # configure the scrollbar to scroll the Treeview widget
-        my_tree.configure(yscrollcommand=tree_scroll.set)
-        tree_scroll.configure(command=my_tree.yview)
+        # configure the scrollbar to scroll the Treeview widget vertically
+        my_tree.configure(yscrollcommand=tree_scroll_y.set)
+        tree_scroll_y.configure(command=my_tree.yview)
+
+        # configure the scrollbar to scroll the Treeview widget horizontally
+        my_tree.configure(xscrollcommand=tree_scroll_x.set)
+        tree_scroll_x.configure(command=my_tree.xview)
 
         # add columns to the Treeview widget
         my_tree['columns'] = ('NIK', 'Name', 'Car', 'DateIn', 'DateOut', 'Price', 'Status')
@@ -234,28 +324,271 @@ def show_all():
 
         ft.show_full_data(my_tree)
 
-def show_by_nik():             
-        print("Show By NIK")
+def show_get_length_nik():
+        global button_exit,entry_nik, button_validate, top_frame, label_menu
 
-def edit_menu():                
-        global top_frame, bottom_frame
-        
-        top_frame.grid_forget()
-        bottom_frame.grid_forget()
+        ft.show_validate()
+        if ft.show_validate() == False:
+                winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Error.wav", winsound.SND_ASYNC)
+                pesan = "Data masih kosong silahkan tambah data terlebih dahulu"
+                showinfo(title="Warning",message=pesan)
+                pass
+        else:
+                nik_type_menu()
 
-        mid_frame = Frame(root, width=1175, height=500, bg='grey')
-        mid_frame.grid(row=1, column=0, padx=50, pady=50)
+                # add button after entry nik to validate
+                button_validate = Button(top_frame, text="Validate", width=10, height=1, command=show_get_entry_nik)
+                button_validate.grid(row=0, column=2, padx=30, pady=10)
 
-def delete_menu():             
-        global top_frame, bottom_frame
-        
-        top_frame.grid_forget()
-        bottom_frame.grid_forget()
+def show_get_entry_nik():
+        global entry_nik, data_nik, label_menu, button_exit
+        data_nik = entry_nik.get()
+        if len(data_nik) != 10:
+                winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Error.wav", winsound.SND_ASYNC)
+                pesan = "NIK harus 10 digit"
+                showinfo(title="Warning",message=pesan)
+        else:
 
-        mid_frame = Frame(root, width=1175, height=500, bg='grey')
-        mid_frame.grid(row=1, column=0, padx=50, pady=50)
+                ft.nik_validate(data_nik)       
+                if ft.nik_validate(data_nik) == False:
+                        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Error.wav", winsound.SND_ASYNC)
+                        pesan = f"Data dengan NIK {data_nik} belum ada silahkan tambah data nik-nya terlebih dahulu"
+                        showinfo(title="Warning",message=pesan)
+                else:
+                        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Success.wav", winsound.SND_ASYNC)
+                        pesan = f"Data dengan NIK {data_nik} ada inilah hasilnya"
+                        showinfo(title="Success",message=pesan)
+                        button_exit.grid_forget()
+                        show_by_nik()
 
-def exit_menu():                
+def show_by_nik():
+        global top_frame, data_nik, button_exit, entry_nik, button_validate, label_menu
+
+        button_exit.grid_forget()
+        entry_nik.grid_forget()
+        button_validate.grid_forget()
+
+        button_exit = Button(top_frame, text="Exit", width=30, height=3, command=transition)
+        button_exit.grid(row=4, column=0, padx=480, pady=20)
+
+        # create a new frame inside the right frame
+        tree_frame = Frame(top_frame, width=1100, height=500, bg='grey')
+        tree_frame.grid(row=0, column=0, padx=10, pady=50)  
+
+        # create scrollbar vertically
+        tree_scroll_y = Scrollbar(tree_frame)
+        tree_scroll_y.pack(side=RIGHT, fill=Y)
+
+        # create scrollbar horizontally
+        tree_scroll_x = Scrollbar(tree_frame, orient='horizontal')
+        tree_scroll_x.pack(side=BOTTOM, fill=X)
+
+        # Create a Treeview widger and add it to the new frame
+        my_tree = ttk.Treeview(tree_frame)
+        my_tree.pack(side=LEFT, fill=BOTH, expand=True)
+
+        # configure the scrollbar to scroll the Treeview widget vertically
+        my_tree.configure(yscrollcommand=tree_scroll_y.set)
+        tree_scroll_y.configure(command=my_tree.yview)
+
+        # configure the scrollbar to scroll the Treeview widget horizontally
+        my_tree.configure(xscrollcommand=tree_scroll_x.set)
+        tree_scroll_x.configure(command=my_tree.xview)
+
+        # add columns to the Treeview widget
+        my_tree['columns'] = ('NIK', 'Name', 'Car', 'DateIn', 'DateOut', 'Price', 'Status')
+
+        # set column headings
+        my_tree.heading('#0', text='No')
+        my_tree.column('#0', width=50)
+        my_tree.heading('NIK', text='NIK')
+        my_tree.column('NIK', width=150)
+        my_tree.heading('Name', text='Name')
+        my_tree.column('Name', width=150)
+        my_tree.heading('Car', text='Car')
+        my_tree.column('Car', width=150)
+        my_tree.heading('DateIn', text='Date In')
+        my_tree.column('DateIn', width=150)
+        my_tree.heading('DateOut', text='Date Out')
+        my_tree.column('DateOut', width=150)
+        my_tree.heading('Price', text='Harga (Rupiah)')
+        my_tree.column('Price', width=150)
+        my_tree.heading('Status', text='Status')
+        my_tree.column('Status', width=100)
+
+        ft.show_by_nik(my_tree,data_nik)
+
+def edit_menu():       
+        global label_menu, button_validate, entry_nik, entry_mobile, entry_name, entry_harga, entry_tanggal_masuk, entry_status, entry_tanggal_keluar, button_exit
+        nik_type_menu()
+
+        label_menu = Label(root, text="Edit Menu", bg='#4a9c46', font=("Helvetica", 20), height=2)
+        label_menu.grid(row=0, column=0, padx=10, pady=5)
+
+        # add button after entry nik to validate
+        button_validate = Button(top_frame, text="Validate", width=10, height=1, command=edit_get_entry_nik)
+        button_validate.grid(row=0, column=2, padx=10, pady=10)
+
+def edit_get_entry_nik():
+        global entry_nik, data_nik, button_validate, label_menu
+        data_nik = entry_nik.get()
+        if len(data_nik) != 10:
+                winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Error.wav", winsound.SND_ASYNC)
+                pesan = "NIK harus 10 digit"
+                showinfo(title="Warning",message=pesan)
+        else:
+                ft.nik_validate(data_nik)       
+                if ft.nik_validate(data_nik) == False:
+                        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Error.wav", winsound.SND_ASYNC)
+                        pesan = f"Data dengan NIK {data_nik} belum ada silahkan tambah data nik-nya terlebih dahulu"
+                        showinfo(title="Warning",message=pesan)
+                else:
+                        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Success.wav", winsound.SND_ASYNC)
+                        pesan = f"Data dengan NIK {data_nik} ada inilah hasilnya"
+                        showinfo(title="Success",message=pesan)
+                        edit_by_nik()
+
+def edit_by_nik():
+        global top_frame, bottom_frame, data_nik, button_exit, entry_nik, button_validate, label_menu
+        label_menu.grid_forget()
+        show_by_nik()
+        button_exit.grid_forget()
+
+        edit_label = Label(top_frame, text="Apakah anda yakin ingin mengedit data ini?", bg='grey', width=50, font=("Helvetica", 20))
+        edit_label.grid(row=2, column=0, padx=10, pady=10)
+        edit_button = Button(top_frame, text="Yes", width=30, height=3, command=edit_identity)
+        edit_button.grid(row=3, column=0, padx=480, pady=20)
+        button_exit = Button(top_frame, text="No", width=30, height=3, command=transition)
+        button_exit.grid(row=4, column=0, padx=480, pady=20)
+
+def edit_identity():
+        global data_nik
+        input_identity(data_nik)
+
+        all_data = ft.edit_get_data(data_nik)
+
+        data_nama = all_data[1]
+        data_mobil = all_data[2]
+        data_tanggal_masuk = all_data[3]
+        data_tanggal_keluar = all_data[4]
+        data_harga = all_data[5]
+        data_status = all_data[6]
+
+        nama_value = StringVar(value=data_nama)
+        entry_nama = Entry(top_frame, width=52, textvariable=nama_value)
+        entry_nama.config(font=("Arial", 14), bg="white", fg="black", bd=2, relief="groove")
+        entry_nama.grid(row=1, column=1, padx=40, pady=10)
+
+        mobil_value = StringVar(value=data_mobil)
+        entry_mobil = Entry(top_frame, width=52, textvariable=mobil_value)
+        entry_mobil.config(font=("Arial", 14), bg="white", fg="black", bd=2, relief="groove")
+        entry_mobil.grid(row=2, column=1, padx=40, pady=10)
+
+        validate_price = (top_frame.register(validate_digit), '%P')
+        harga_value = StringVar(value=data_harga)
+        entry_harga = Entry(top_frame, width=52, textvariable=harga_value, validate="key", validatecommand=validate_price)
+        entry_harga.config(font=("Arial", 14), bg="white", fg="black", bd=2, relief="groove")
+        entry_harga.grid(row=3, column=1, padx=40, pady=10)
+
+        date_obj_masuk = datetime.strptime(data_tanggal_masuk, '%Y-%m-%d')
+        formatted_date_masuk = date_obj_masuk.strftime('%d/%m/%Y')
+        entry_tanggal_masuk = DateEntry(top_frame, width=50, background='darkblue', foreground='white', borderwidth=2)
+        entry_tanggal_masuk.config(font=("Arial", 14))
+        entry_tanggal_masuk.grid(row=4, column=1, padx=40, pady=10)
+        entry_tanggal_masuk.set_date(formatted_date_masuk)
+
+        date_obj_keluar = datetime.strptime(data_tanggal_keluar, '%Y-%m-%d')
+        formatted_date_keluar = date_obj_keluar.strftime('%d/%m/%Y')
+        entry_tanggal_keluar = DateEntry(top_frame, width=50, background='darkblue', foreground='white', borderwidth=2)
+        entry_tanggal_keluar.config(font=("Arial", 14))
+        entry_tanggal_keluar.grid(row=5, column=1, padx=40, pady=10)
+        entry_tanggal_keluar.set_date(formatted_date_keluar)
+
+        entry_status = tkinter.StringVar(value=data_status)
+        options = ["Progress", "Selesai"]
+        entry_status_options = tkinter.OptionMenu(top_frame, entry_status, "", *options)
+        entry_status_options.configure(font=("Arial", 14), background="white", foreground="black", borderwidth=2, relief="groove", width=48)
+        entry_status_options.grid(row=6, column=1, padx=40, pady=10)
+
+        # add buttons to the bottom frame
+        button_edit = Button(top_frame, text="Save", width=30, height=3, command=edit_get_entry_data)
+        button_edit.grid(row=7, column=0, padx=10, pady=30)  
+
+        # add button after validate to exit menu
+        button_exit = Button(top_frame, text="Exit", width=10, height=1, command=transition)
+        button_exit.grid(row=0, column=2, padx=30, pady=10)
+
+def edit_get_entry_data():
+        global entry_nik, entry_nama, entry_mobil, entry_harga, entry_tanggal_masuk, entry_status, entry_tanggal_keluar
+        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Error.wav", winsound.SND_ASYNC)
+        data_nik = entry_nik.get()
+        data_nama = entry_nama.get()
+        data_mobil = entry_mobil.get()
+        data_harga = entry_harga.get()
+        data_tanggal_masuk = entry_tanggal_masuk.get_date()
+        data_status = entry_status.get()
+        data_tanggal_keluar = entry_tanggal_keluar.get_date()
+        result = messagebox.askyesno(title="Confirmation", message="Apakah anda yakin ingin mengedit data ini?")
+        if result:
+                winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Success.wav", winsound.SND_ASYNC)
+                pesan = f"Data dengan NIK {data_nik} berhasil diedit"
+                showinfo(title="Success",message=pesan)
+                ft.edit_data(data_nik, data_nama, data_mobil, data_harga, data_tanggal_masuk, data_status, data_tanggal_keluar)
+                edit_menu()
+        else:
+                edit_menu()
+
+def delete_menu():     
+        global label_menu, button_validate                       
+        nik_type_menu()
+
+        label_menu = Label(root, text="Delete Menu", bg='#4a9c46', font=("Helvetica", 20), height=2)
+        label_menu.grid(row=0, column=0, padx=10, pady=5)
+
+        # add button after entry nik to validate
+        button_validate = Button(top_frame, text="Validate", width=10, height=1, command=delete_get_entry_nik)
+        button_validate.grid(row=0, column=2, padx=10, pady=10)
+
+def delete_get_entry_nik():
+        global entry_nik, data_nik, button_validate, label_menu
+        data_nik = entry_nik.get()
+        if len(data_nik) != 10:
+                winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Error.wav", winsound.SND_ASYNC)
+                pesan = "NIK harus 10 digit"
+                showinfo(title="Warning",message=pesan)
+        else:
+                ft.nik_validate(data_nik)       
+                if ft.nik_validate(data_nik) == False:
+                        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Error.wav", winsound.SND_ASYNC)
+                        pesan = f"Data dengan NIK {data_nik} tidak ditemukan harap input nik yang lainnya"
+                        showinfo(title="Warning",message=pesan)
+                else:
+                        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Success.wav", winsound.SND_ASYNC)
+                        pesan = f"Data dengan NIK {data_nik} ada inilah hasilnya"
+                        showinfo(title="Success",message=pesan)
+                        delete_by_nik()
+
+def delete_by_nik():
+        global top_frame, bottom_frame, entry_nik, button_exit, button_validate, label_menu
+        label_menu.grid_forget()
+        show_by_nik()
+        button_exit.grid_forget()
+
+        delete_label = Label(top_frame, text="Apakah anda yakin ingin menghapus data ini?", bg='grey', width=50, font=("Helvetica", 20))
+        delete_label.grid(row=2, column=0, padx=10, pady=10)
+        delete_button = Button(top_frame, text="Yes", width=30, height=3, command=delete_get_entry_data)
+        delete_button.grid(row=3, column=0, padx=480, pady=20)
+        button_exit = Button(top_frame, text="No", width=30, height=3, command=transition)
+        button_exit.grid(row=4, column=0, padx=480, pady=20)
+
+def delete_get_entry_data():
+        ft.delete_data(data_nik)
+        winsound.PlaySound("D:\\Users\\david\\Onedrive\\Documents\\Project\\Application\\Education\\Python\\RentACar\\assets\\sounds\\Success.wav", winsound.SND_ASYNC)
+        pesan = f"Data dengan NIK {data_nik} berhasil dihapus"
+        showinfo(title="Success",message=pesan)
+        delete_menu()
+
+def exit_menu():                    
         root.destroy()
 
 if __name__ == '__main__':
