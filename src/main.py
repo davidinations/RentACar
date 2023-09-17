@@ -357,7 +357,7 @@ def show_get_length_nik():
         """
         Fungsi Untuk Validasi Jumlah Data
         """        
-        global button_exit,entry_nik, button_validate, top_frame, label_menu
+        global button_exit, entry_nik, button_validate, top_frame, label_menu
 
         ft.show_validate()
         if ft.show_validate() == False:
@@ -505,7 +505,7 @@ def edit_identity():
         """
         Menu Untuk Mengedit Identitas Data
         """
-        global data_nik
+        global data_nik, entry_nama, entry_mobil, entry_harga, entry_tanggal_masuk, entry_status, entry_tanggal_keluar
         input_identity(data_nik)
 
         all_data = ft.edit_get_data(data_nik)

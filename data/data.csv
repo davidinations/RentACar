@@ -1,5 +1,5 @@
 nik;name;merk;start_date;end_date;price;status
-1234567891;Andi;Honda;2022-11-28;2022-02-12;300000;Selesai
+1234567891;Andina;Alfa Romeo;2022-10-05;2022-12-02;300000;Selesai
 1234567892;Caca;Suzuki;2022-10-10;2022-11-22;200000;Selesai
 1234567893;David;Daihatsu;2023-09-14;2023-09-14;23131232;Progress
 1234567894;Test;Hino;2020-09-01;2021-09-16;7446574;selesai
@@ -7,6 +7,5 @@ nik;name;merk;start_date;end_date;price;status
 2313123123;Dasdasd;sdadasda;2021-07-13;2022-09-08;22222222;Selesai
 2313123132;sdadasds;sdadsadas;2016-09-08;2019-09-13;2222222;Selesai
 1234565898;sdasdasd;sdasdasdas;2023-09-14;2023-09-14;222222222;Progress
-1234567890;Aditya;Ford;2017-04-07;2018-09-14;3000000;Selesai
 2313123121;Yes;Mitsuoka;2023-09-20;2023-09-28;1000000;Selesai
 1234567899;YesSir;Ferrari;2019-09-13;2023-09-14;5555555;Progress
