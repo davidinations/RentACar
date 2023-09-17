@@ -24,5 +24,5 @@ The directory structure of IndoMarket project looks like this:
 
 ## Contribute
 
-If you'd like to contribute to RentACar Apps, check out https://github.com/davidinations/RentACar, or feel free to contact me in
+If you'd like to contribute to RentACar Apps, check out https://github.com/davidinations/RentACar, or feel free to contact me in davidinations@icloud.com
 
