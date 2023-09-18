@@ -2,6 +2,7 @@ import features as ft
 import winsound
 import tkinter
 import re
+import babel.numbers
 from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import showinfo
