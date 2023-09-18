@@ -10,6 +10,19 @@ from tkinter import messagebox
 from tkcalendar import DateEntry
 from datetime import datetime
 
+def sort_data(treeview, column, reverse):
+        """
+        Fungsi untuk mengurutkan data pada tabel
+        """        
+        data = [(treeview.set(child, column), child) for child in treeview.get_children('')]
+
+        data.sort(reverse=reverse)
+
+        for index, (val, child) in enumerate(data):
+                treeview.move(child, '', index)
+
+        treeview.heading(column, command=lambda: sort_data(treeview, column, not reverse))
+                
 def validate_number(input):
         """
         mendeteksi inputan keyboard supaya hanya diperbolehkan angka dan maksimal 10 digit
@@ -337,19 +350,19 @@ def show_all():
 
         my_tree.heading('#0', text='No')
         my_tree.column('#0', width=50)
-        my_tree.heading('NIK', text='NIK')
+        my_tree.heading('NIK', text='NIK', command=lambda: sort_data(my_tree, 'NIK', False))
         my_tree.column('NIK', width=150)
-        my_tree.heading('Name', text='Name')
+        my_tree.heading('Name', text='Name', command=lambda: sort_data(my_tree, 'Name', False))
         my_tree.column('Name', width=150)
-        my_tree.heading('Car', text='Car')
+        my_tree.heading('Car', text='Car', command=lambda: sort_data(my_tree, 'Car', False))
         my_tree.column('Car', width=150)
-        my_tree.heading('DateIn', text='Date In')
+        my_tree.heading('DateIn', text='Date In', command=lambda: sort_data(my_tree, 'DateIn', False))
         my_tree.column('DateIn', width=150)
-        my_tree.heading('DateOut', text='Date Out')
+        my_tree.heading('DateOut', text='Date Out', command=lambda: sort_data(my_tree, 'DateOut', False))
         my_tree.column('DateOut', width=150)
-        my_tree.heading('Price', text='Harga (Rupiah)')
+        my_tree.heading('Price', text='Harga (Rupiah)', command=lambda: sort_data(my_tree, 'Price', False))
         my_tree.column('Price', width=150)
-        my_tree.heading('Status', text='Status')
+        my_tree.heading('Status', text='Status', command=lambda: sort_data(my_tree, 'Status', False))
         my_tree.column('Status', width=100)
 
         ft.show_full_data(my_tree)
