@@ -183,8 +183,8 @@ def add_menu():
         button_exit = Button(top_frame, text="Exit", width=10, height=1, command=transition)
         button_exit.grid(row=0, column=3, padx=40, pady=10)
 
-        label_menu = Label(root, text="Add Menu", bg='#4a9c46', font=("Helvetica", 20), height=2)
-        label_menu.grid(row=0, column=0, padx=10, pady=5)
+        label_menu = Label(root, text=" Add Menu ", bg='#4a9c46', font=("Helvetica", 20), height=2)
+        label_menu.grid(row=0, column=0, padx=20, pady=5)
 
         button_validate = Button(top_frame, text="Validate", width=10, height=1, command=add_get_entry_nik)
         button_validate.grid(row=0, column=2, padx=10, pady=10)
@@ -468,8 +468,8 @@ def edit_menu():
         global label_menu, button_validate, entry_nik, entry_mobile, entry_name, entry_harga, entry_tanggal_masuk, entry_status, entry_tanggal_keluar, button_exit
         nik_type_menu()
 
-        label_menu = Label(root, text="Edit Menu", bg='#4a9c46', font=("Helvetica", 20), height=2)
-        label_menu.grid(row=0, column=0, padx=10, pady=5)
+        label_menu = Label(root, text=" Edit Menu ", bg='#4a9c46', font=("Helvetica", 20), height=2)
+        label_menu.grid(row=0, column=0, padx=20, pady=5)
 
         button_validate = Button(top_frame, text="Validate", width=10, height=1, command=edit_get_entry_nik)
         button_validate.grid(row=0, column=2, padx=10, pady=10)
@@ -603,8 +603,8 @@ def delete_menu():
         global label_menu, button_validate                       
         nik_type_menu()
 
-        label_menu = Label(root, text="Delete Menu", bg='#4a9c46', font=("Helvetica", 20), height=2)
-        label_menu.grid(row=0, column=0, padx=10, pady=5)
+        label_menu = Label(root, text=" Delete Menu ", bg='#4a9c46', font=("Helvetica", 20), height=2)
+        label_menu.grid(row=0, column=0, padx=20, pady=5)
 
         button_validate = Button(top_frame, text="Validate", width=10, height=1, command=delete_get_entry_nik)
         button_validate.grid(row=0, column=2, padx=10, pady=10)
