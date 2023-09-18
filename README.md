@@ -8,7 +8,7 @@ The Feature Included:<br>
 
 ## How To Use
 
-Extract The Zip File And Run Exe File Inside The Folder (There is Some Error In Add Edit And Delete Function With Exe File)
+Extract The Zip File And Run Exe File Inside The Folder
     
 ## Project Organization
 
