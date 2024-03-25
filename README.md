@@ -1,6 +1,6 @@
 ## RentACar
 
-This is A Simple CRUD of Python GUI with the help of tkinter module. I Think This Is Only Useful For Manage Payment Transactions Of The Rental Car. Still No Dashboard Graphic No Car Image And So Much More`<br>`
+This is A Simple CRUD of Python GUI with the help of tkinter module. I Think This Is Only Useful For Manage Payment Transactions Of The Rental Car. Still No Dashboard Graphic No Car Image And So Much More `<br>`
 The Feature Included:`<br>`
 
 1. Show Data Payment Of Rental Car Whether Show All Or By ID Person.`<br>`
@@ -18,11 +18,11 @@ The directory structure of IndoMarket project looks like this:
 
     ├── README.md          	<- The top-level README for developers using this project.
     │
-    ├── data               		<- 1 CSV File With Column NIK,Nama,Mobil,Harga,Tanggal_Masuk,Tanggal_Keluar,And Status
+    ├── data               	<- 1 CSV File With Column NIK,Nama,Mobil,Harga,Tanggal_Masuk,Tanggal_Keluar,And Status
     │
-    ├── Assets             		<- Images Icon File and Sound For Click,Warning, And Success
+    ├── Assets             	<- Images Icon File and Sound For Click,Warning, And Success
     │
-    └── src                		<- Source code for use in this project.
+    └── src                	<- Source code for use in this project.
 
 ## Contribute
 
