@@ -78,7 +78,7 @@ def nik_type_menu():
         """
         menu untuk memasukkan NIK
         """
-        winsound.PlaySound("../RentACar/assets/sounds/Click.wav", winsound.SND_ASYNC)           
+        winsound.PlaySound("../assets/sounds/Click.wav", winsound.SND_ASYNC)           
         
         global top_frame, bottom_frame, label_menu, entry_nik, button_exit
         
@@ -166,7 +166,7 @@ def transition():
         """
         Fungsi Untuk Animasi Kembali Ke Menu Utama
         """        
-        winsound.PlaySound("../RentACar/assets/sounds/Click.wav", winsound.SND_ASYNC)   
+        winsound.PlaySound("../assets/sounds/Click.wav", winsound.SND_ASYNC)   
         global bottom_frame, top_frame, label_menu
         bottom_frame.grid_forget()
         top_frame.grid_forget()
@@ -196,18 +196,18 @@ def add_get_entry_nik():
         global entry_nik, data_nik
         data_nik = entry_nik.get()
         if len(data_nik) != 10:
-                winsound.PlaySound("../RentACar/assets/sounds/Error.wav", winsound.SND_ASYNC)
+                winsound.PlaySound("../assets/sounds/Error.wav", winsound.SND_ASYNC)
                 pesan = "NIK harus 10 digit"
                 showinfo(title="Warning",message=pesan)
         else:
                 ft.nik_validate(data_nik)       
                 if ft.nik_validate(data_nik) == False:
-                        winsound.PlaySound("../RentACar/assets/sounds/Success.wav", winsound.SND_ASYNC)
+                        winsound.PlaySound("../assets/sounds/Success.wav", winsound.SND_ASYNC)
                         pesan = f"Data dengan NIK {data_nik} belum ada silahkan tambah data lain terlebih dahulu"
                         showinfo(title="Success",message=pesan)
                         add_identity()
                 else:
-                        winsound.PlaySound("../RentACar/assets/sounds/Error.wav", winsound.SND_ASYNC)
+                        winsound.PlaySound("../assets/sounds/Error.wav", winsound.SND_ASYNC)
                         pesan = f"Data dengan NIK {data_nik} sudah ada"
                         showinfo(title="Warning",message=pesan)
 
@@ -264,10 +264,10 @@ def add_get_entry_data():
         data_tanggal_masuk = entry_tanggal_masuk.get_date()
         data_status = entry_status.get()
         data_tanggal_keluar = entry_tanggal_keluar.get_date()
-        winsound.PlaySound("../RentACar/assets/sounds/Error.wav", winsound.SND_ASYNC)
+        winsound.PlaySound("../assets/sounds/Error.wav", winsound.SND_ASYNC)
         result = messagebox.askyesno(title="Confirmation", message="Apakah anda yakin ingin menambahkan data ini?")
         if result:
-                winsound.PlaySound("../RentACar/assets/sounds/Success.wav", winsound.SND_ASYNC)
+                winsound.PlaySound("../assets/sounds/Success.wav", winsound.SND_ASYNC)
                 pesan = f"Data dengan NIK {data_nik} berhasil ditambahkan"
                 showinfo(title="Success",message=pesan)
                 ft.add_data(data_nik, data_nama, data_mobil, data_harga, data_tanggal_masuk, data_status, data_tanggal_keluar)
@@ -279,7 +279,7 @@ def show_menu():
         """
         Menu Untuk Menampilkan Data
         """        
-        winsound.PlaySound("../RentACar/assets/sounds/Click.wav", winsound.SND_ASYNC)   
+        winsound.PlaySound("../assets/sounds/Click.wav", winsound.SND_ASYNC)   
         
         global top_frame, bottom_frame, label_menu, button_show_all, button_show_by_nik, button_exit
         
@@ -308,12 +308,12 @@ def show_get_length_all():
         global label_menu             
         ft.show_validate()
         if ft.show_validate() == False:
-                winsound.PlaySound("../RentACar/assets/sounds/Error.wav", winsound.SND_ASYNC)
+                winsound.PlaySound("../assets/sounds/Error.wav", winsound.SND_ASYNC)
                 pesan = "Data masih kosong silahkan tambah data terlebih dahulu"
                 showinfo(title="Warning",message=pesan)
                 pass
         else:
-                winsound.PlaySound("../RentACar/assets/sounds/Click.wav", winsound.SND_ASYNC)
+                winsound.PlaySound("../assets/sounds/Click.wav", winsound.SND_ASYNC)
                 button_show_all.grid_forget()
                 button_show_by_nik.grid_forget()
                 button_exit.grid_forget()
@@ -375,7 +375,7 @@ def show_get_length_nik():
 
         ft.show_validate()
         if ft.show_validate() == False:
-                winsound.PlaySound("../RentACar/assets/sounds/Error.wav", winsound.SND_ASYNC)
+                winsound.PlaySound("../assets/sounds/Error.wav", winsound.SND_ASYNC)
                 pesan = "Data masih kosong silahkan tambah data terlebih dahulu"
                 showinfo(title="Warning",message=pesan)
                 pass
@@ -393,17 +393,17 @@ def show_get_entry_nik():
         global entry_nik, data_nik, label_menu, button_exit
         data_nik = entry_nik.get()
         if len(data_nik) != 10:
-                winsound.PlaySound("../RentACar/assets/sounds/Error.wav", winsound.SND_ASYNC)
+                winsound.PlaySound("../assets/sounds/Error.wav", winsound.SND_ASYNC)
                 pesan = "NIK harus 10 digit"
                 showinfo(title="Warning",message=pesan)
         else:
                 ft.nik_validate(data_nik)       
                 if ft.nik_validate(data_nik) == False:
-                        winsound.PlaySound("../RentACar/assets/sounds/Error.wav", winsound.SND_ASYNC)
+                        winsound.PlaySound("../assets/sounds/Error.wav", winsound.SND_ASYNC)
                         pesan = f"Data dengan NIK {data_nik} belum ada silahkan tambah data nik-nya terlebih dahulu"
                         showinfo(title="Warning",message=pesan)
                 else:
-                        winsound.PlaySound("../RentACar/assets/sounds/Success.wav", winsound.SND_ASYNC)
+                        winsound.PlaySound("../assets/sounds/Success.wav", winsound.SND_ASYNC)
                         pesan = f"Data dengan NIK {data_nik} ada inilah hasilnya"
                         showinfo(title="Success",message=pesan)
                         button_exit.grid_forget()
@@ -484,17 +484,17 @@ def edit_get_entry_nik():
         global entry_nik, data_nik, button_validate, label_menu
         data_nik = entry_nik.get()
         if len(data_nik) != 10:
-                winsound.PlaySound("../RentACar/assets/sounds/Error.wav", winsound.SND_ASYNC)
+                winsound.PlaySound("../assets/sounds/Error.wav", winsound.SND_ASYNC)
                 pesan = "NIK harus 10 digit"
                 showinfo(title="Warning",message=pesan)
         else:
                 ft.nik_validate(data_nik)       
                 if ft.nik_validate(data_nik) == False:
-                        winsound.PlaySound("../RentACar/assets/sounds/Error.wav", winsound.SND_ASYNC)
+                        winsound.PlaySound("../assets/sounds/Error.wav", winsound.SND_ASYNC)
                         pesan = f"Data dengan NIK {data_nik} belum ada silahkan tambah data nik-nya terlebih dahulu"
                         showinfo(title="Warning",message=pesan)
                 else:
-                        winsound.PlaySound("../RentACar/assets/sounds/Success.wav", winsound.SND_ASYNC)
+                        winsound.PlaySound("../assets/sounds/Success.wav", winsound.SND_ASYNC)
                         pesan = f"Data dengan NIK {data_nik} ada inilah hasilnya"
                         showinfo(title="Success",message=pesan)
                         edit_by_nik()
@@ -578,7 +578,7 @@ def edit_get_entry_data():
         Fungsi Untuk Mendapatkan Data Yang Dimasukkan saat Mengedit Data + konfirmasi
         """
         global entry_nik, entry_nama, entry_mobil, entry_harga, entry_tanggal_masuk, entry_status, entry_tanggal_keluar
-        winsound.PlaySound("../RentACar/assets/sounds/Error.wav", winsound.SND_ASYNC)
+        winsound.PlaySound("../assets/sounds/Error.wav", winsound.SND_ASYNC)
         data_nik = entry_nik.get()
         data_nama = entry_nama.get()
         data_mobil = entry_mobil.get()
@@ -588,7 +588,7 @@ def edit_get_entry_data():
         data_tanggal_keluar = entry_tanggal_keluar.get_date()
         result = messagebox.askyesno(title="Confirmation", message="Apakah anda yakin ingin mengedit data ini?")
         if result:
-                winsound.PlaySound("../RentACar/assets/sounds/Success.wav", winsound.SND_ASYNC)
+                winsound.PlaySound("../assets/sounds/Success.wav", winsound.SND_ASYNC)
                 pesan = f"Data dengan NIK {data_nik} berhasil diedit"
                 showinfo(title="Success",message=pesan)
                 ft.edit_data(data_nik, data_nama, data_mobil, data_harga, data_tanggal_masuk, data_status, data_tanggal_keluar)
@@ -619,17 +619,17 @@ def delete_get_entry_nik():
         global entry_nik, data_nik, button_validate, label_menu
         data_nik = entry_nik.get()
         if len(data_nik) != 10:
-                winsound.PlaySound("../RentACar/assets/sounds/Error.wav", winsound.SND_ASYNC)
+                winsound.PlaySound("../assets/sounds/Error.wav", winsound.SND_ASYNC)
                 pesan = "NIK harus 10 digit"
                 showinfo(title="Warning",message=pesan)
         else:
                 ft.nik_validate(data_nik)       
                 if ft.nik_validate(data_nik) == False:
-                        winsound.PlaySound("../RentACar/assets/sounds/Error.wav", winsound.SND_ASYNC)
+                        winsound.PlaySound("../assets/sounds/Error.wav", winsound.SND_ASYNC)
                         pesan = f"Data dengan NIK {data_nik} tidak ditemukan harap input nik yang lainnya"
                         showinfo(title="Warning",message=pesan)
                 else:
-                        winsound.PlaySound("../RentACar/assets/sounds/Success.wav", winsound.SND_ASYNC)
+                        winsound.PlaySound("../assets/sounds/Success.wav", winsound.SND_ASYNC)
                         pesan = f"Data dengan NIK {data_nik} ada inilah hasilnya"
                         showinfo(title="Success",message=pesan)
                         delete_by_nik()
@@ -655,7 +655,7 @@ def delete_get_entry_data():
         Fungsi Untuk Mendapatkan Data Yang Dimasukkan saat Menghapus Data + konfirmasi
         """
         ft.delete_data(data_nik)
-        winsound.PlaySound("../RentACar/assets/sounds/Success.wav", winsound.SND_ASYNC)
+        winsound.PlaySound("../assets/sounds/Success.wav", winsound.SND_ASYNC)
         pesan = f"Data dengan NIK {data_nik} berhasil dihapus"
         showinfo(title="Success",message=pesan)
         delete_menu()
@@ -667,7 +667,7 @@ if __name__ == '__main__':
         # create a windows
         root = tkinter.Tk()
         # config icon windows
-        root.iconbitmap("../RentACar/assets/images/favicon.ico")
+        root.iconbitmap("../assets/images/favicon.ico")
         # config size windows
         root.geometry("1280x720+150-50")   # <width>x<height>+<x_position>+<y_position>
         # make a windows size fixed
