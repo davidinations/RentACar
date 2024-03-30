@@ -13,9 +13,9 @@ import pygame.mixer
 # Initialize the mixer module
 pygame.mixer.init()
 
-click_sound = pygame.mixer.Sound("../RentACar/assets/sounds/Click.wav")
-error_sound = pygame.mixer.Sound("../RentACar/assets/sounds/Error.wav")
-success_sound = pygame.mixer.Sound("../RentACar/assets/sounds/Success.wav")
+click_sound = pygame.mixer.Sound("../assets/sounds/Click.wav")
+error_sound = pygame.mixer.Sound("../assets/sounds/Error.wav")
+success_sound = pygame.mixer.Sound("../assets/sounds/Success.wav")
 
 def sort_data(treeview, column, reverse):
         """
@@ -677,7 +677,7 @@ if __name__ == '__main__':
         # create a windows
         root = tkinter.Tk()
         # config icon windows
-        root.iconbitmap("../RentACar/assets/images/favicon.ico")
+        root.iconbitmap("../assets/images/favicon.ico")
         # config size windows
         root.geometry("1280x720+150-50")   # <width>x<height>+<x_position>+<y_position>
         # make a windows size fixed

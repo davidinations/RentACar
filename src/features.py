@@ -1,6 +1,6 @@
 import csv
 
-path = "../RentACar/data/data.csv"
+path = "../data/data.csv"
 
 def nik_validate(data_nik):
     """
