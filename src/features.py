@@ -1,6 +1,14 @@
 import csv
+import os
 
-path = "../data/data.csv"
+# Get the absolute path to the directory of the current script file
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Go up one level to get the base path
+base_path = os.path.dirname(script_dir)
+
+# Define the path to the csv file
+path = os.path.join(base_path, 'data', 'data.csv')
 
 def nik_validate(data_nik):
     """

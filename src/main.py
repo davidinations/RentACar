@@ -1,6 +1,7 @@
 import features as ft
 import tkinter
 import re
+import os
 import babel.numbers
 from tkinter import *
 from tkinter import ttk
@@ -13,9 +14,22 @@ import pygame.mixer
 # Initialize the mixer module
 pygame.mixer.init()
 
-click_sound = pygame.mixer.Sound("../assets/sounds/Click.wav")
-error_sound = pygame.mixer.Sound("../assets/sounds/Error.wav")
-success_sound = pygame.mixer.Sound("../assets/sounds/Success.wav")
+# Get the absolute path to the directory of the current script file
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Go up one level to get the base path
+base_path = os.path.dirname(script_dir)
+
+# Construct the paths to the sound files
+click_sound_path = os.path.join(base_path, "assets", "sounds", "Click.wav")
+error_sound_path = os.path.join(base_path, "assets", "sounds", "Error.wav")
+success_sound_path = os.path.join(base_path, "assets", "sounds", "Success.wav")
+icon_path = os.path.join(base_path, "assets", "images", "favicon.ico")
+
+# Load the sounds Into Variables
+click_sound = pygame.mixer.Sound(click_sound_path)
+error_sound = pygame.mixer.Sound(error_sound_path)
+success_sound = pygame.mixer.Sound(success_sound_path)
 
 def sort_data(treeview, column, reverse):
         """
@@ -677,7 +691,7 @@ if __name__ == '__main__':
         # create a windows
         root = tkinter.Tk()
         # config icon windows
-        root.iconbitmap("../assets/images/favicon.ico")
+        root.iconbitmap(icon_path)
         # config size windows
         root.geometry("1280x720+150-50")   # <width>x<height>+<x_position>+<y_position>
         # make a windows size fixed
