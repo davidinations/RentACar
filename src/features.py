@@ -1,6 +1,6 @@
 import csv
 
-path = "D:\\david\\Onedrive\\Documents\\Future\\Project\\Application\\Education\\Python\\RentACar\\data\\data.csv"
+path = "../data/data.csv"
 
 def nik_validate(data_nik):
     """
